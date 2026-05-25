@@ -1,3 +1,12 @@
+---
+title: Sentiment Service
+emoji: 🎭
+colorFrom: blue
+colorTo: green
+sdk: docker
+pinned: false
+---
+
 # Sentiment Classification Service
 ### Case 9 — Model Serving Lite
 
