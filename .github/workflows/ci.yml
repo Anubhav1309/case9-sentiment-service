@@ -152,6 +152,6 @@ jobs:
       - name: Smoke test container
         run: |
           docker run -d --name svc -p 8000:8000 sentiment-service:ci
-          sleep 90   # wait for model load
+          sleep 120   # wait for model load
           curl -f http://localhost:8000/health
           docker stop svc
