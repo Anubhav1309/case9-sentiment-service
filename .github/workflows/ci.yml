@@ -40,7 +40,12 @@ jobs:
 
       - name: Lint (ruff)
         run: ruff check app/ retrain/ tests/
-
+        
+      - name: Start API server
+        run: |
+          uvicorn app.main:app --host 0.0.0.0 --port 8000 &
+          sleep 15
+          
       - name: Run unit tests
         run: pytest tests/ -v --tb=short
 
