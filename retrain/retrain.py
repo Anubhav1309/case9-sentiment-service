@@ -202,10 +202,12 @@ def main():
 
     metrics_out = {
         **metrics,
-        "baseline_f1": args.baseline_f1,
-        "delta": delta,
-        "gate_passed": delta >= args.min_f1_delta,
+        "baseline_f1": float(args.baseline_f1),
+        "f1_weighted": float(candidate_f1),
+        "delta": float(delta),
+        "gate_passed": bool(delta >= args.min_f1_delta),
     }
+
     out_path = output_dir / "eval_metrics.json"
     out_path.write_text(json.dumps(metrics_out, indent=2))
     print(f"Metrics written to {out_path}")
