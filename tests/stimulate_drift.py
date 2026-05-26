@@ -1,25 +1,28 @@
-import requests, random, time
+import requests
+import json
 
-BASE = "https://anubhav130-case9-sentiment-mlops-service.hf.space"
+BASE = "https://Anubhav130-sentiment.hf.space"
 
-# Phase 1: send 200 short normal requests to build baseline
-print("Building baseline (200 requests)...")
+print("Step 1: Checking drift status before simulation...")
+r = requests.get(f"{BASE}/drift")
+print(json.dumps(r.json(), indent=2))
+
+print("\nStep 2: Sending 200 normal short requests to build baseline...")
 for i in range(200):
     requests.post(f"{BASE}/predict", json={"text": "good product loved it"})
+    if i % 50 == 0:
+        print(f"  {i}/200 done...")
 
-print("Baseline built. Checking drift status...")
-print(requests.get(f"{BASE}/drift").json())
+print("\nStep 3: Checking drift after baseline built...")
+r = requests.get(f"{BASE}/drift")
+print(json.dumps(r.json(), indent=2))
 
-# Phase 2: send 50 very long weird-vocab requests to trigger drift
-print("\nSending drifted requests (long medical text)...")
-long_text = "The patient presented with acute exacerbation of chronic obstructive pulmonary disease requiring immediate bronchodilator therapy and corticosteroid administration." * 3
+print("\nStep 4: Sending 50 long unusual requests to trigger drift...")
+long_text = "The patient presented with acute exacerbation of chronic obstructive pulmonary disease requiring immediate bronchodilator therapy and corticosteroid administration contraindicated by renal dysfunction." * 3
 for i in range(50):
     requests.post(f"{BASE}/predict", json={"text": long_text})
 
-print("\nDrift status after shift:")
-print(requests.get(f"{BASE}/drift").json())
+print("\nStep 5: Checking drift after shift — should show drift_detected: true")
+r = requests.get(f"{BASE}/drift")
+print(json.dumps(r.json(), indent=2))
 
-# Phase 3: reset and verify
-requests.post(f"{BASE}/drift/reset")
-print("\nAfter reset:")
-print(requests.get(f"{BASE}/drift").json())
