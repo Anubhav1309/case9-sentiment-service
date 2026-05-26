@@ -1,6 +1,7 @@
-import requests, random, time
+import requests
+import json
 
-BASE = "https://anubhav130-case9-sentiment-mlops-service.hf.space"
+BASE = "https://anubhav130-sentiment.hf.space"
 
 # Phase 1: send 200 short normal requests to build baseline
 print("Building baseline (200 requests)...")
