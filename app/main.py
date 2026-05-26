@@ -5,7 +5,6 @@ Wraps distilbert-base-uncased-finetuned-sst-2-english in a FastAPI service.
 
 import time
 import uuid
-import logging
 from datetime import datetime
 from contextlib import asynccontextmanager
 
@@ -91,16 +90,6 @@ async def audit_middleware(request: Request, call_next):
 
 
 # ── Routes ────────────────────────────────────────────────────────────────────
-@app.get("/", tags=["ops"])
-def root():
-    return {
-        "service": "Sentiment Classification API",
-        "docs": "/docs",
-        "health": "/health",
-        "predict": "/predict",
-        "drift": "/drift"
-    }
-
 @app.get("/health", response_model=HealthResponse, tags=["ops"])
 def health():
     """Liveness probe — used by Docker HEALTHCHECK and Render."""
