@@ -1,24 +1,18 @@
 import requests
-import json
 
 BASE = "http://localhost:8000"
 
-# Health
-r = requests.get(f"{BASE}/health")
-print("HEALTH:", json.dumps(r.json(), indent=2))
+def test_health():
+    r = requests.get(f"{BASE}/health", timeout=5)
+    assert r.status_code == 200
 
-# Positive
-r = requests.post(f"{BASE}/predict", json={"text": "Absolutely love this product!"})
-print("POSITIVE:", json.dumps(r.json(), indent=2))
+def test_predict():
+    payload = {"text": "This movie was amazing"}
 
-# Negative
-r = requests.post(f"{BASE}/predict", json={
-    "text": "Terrible quality, broke on day one.",
-    "request_id": "test-001"
-})
-print("NEGATIVE:", json.dumps(r.json(), indent=2))
+    r = requests.post(
+        f"{BASE}/predict",
+        json=payload,
+        timeout=5
+    )
 
-# Drift
-r = requests.get(f"{BASE}/drift")
-print("DRIFT:", json.dumps(r.json(), indent=2))
-
+    assert r.status_code == 200
