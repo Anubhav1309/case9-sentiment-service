@@ -23,7 +23,6 @@ import os
 import sys
 from pathlib import Path
 
-import numpy as np
 from sklearn.metrics import f1_score, classification_report
 from transformers import (
     AutoModelForSequenceClassification,
@@ -218,7 +217,7 @@ def main():
         )
         sys.exit(1)
     else:
-        print(f"\n✅  GATE PASSED — candidate promoted.")
+        print("\n✅  GATE PASSED — candidate promoted.")
         sys.exit(0)
 
 
