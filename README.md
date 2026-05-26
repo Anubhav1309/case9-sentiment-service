@@ -16,8 +16,7 @@ A production-ready sentiment analysis API wrapping DistilBERT, with structured l
 
 ## Live API
 
-> **Base URL:** `https://your-service.onrender.com`
-> *(Replace with your Render URL after deployment)*
+> **Base URL:** `https://anubhav130-sentiment.hf.space`
 
 ---
 
@@ -185,20 +184,6 @@ sentiment-service/
 ├── README.md
 └── WRITEUP.md
 ```
-
----
-
-## Deployment (Render.com)
-
-1. Push this repo to GitHub
-2. Go to [render.com](https://render.com) → New Web Service → Connect repo
-3. Set Runtime to **Docker**
-4. Add environment variable: `BASELINE_F1=0.92`
-5. Deploy — your live URL will be `https://<your-service>.onrender.com`
-
-> **Note:** Render free tier has a ~50 second cold start and spins down after 15 minutes of inactivity.
-
----
 
 ## Running Tests
 
