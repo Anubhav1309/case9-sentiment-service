@@ -1,5 +1,5 @@
-import requests, json
-
+import requests
+import json
 BASE = "http://localhost:8000"
 
 # Health
