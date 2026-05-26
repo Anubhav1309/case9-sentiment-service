@@ -1,5 +1,4 @@
 import requests
-import json
 
 BASE = "https://anubhav130-sentiment.hf.space"
 
