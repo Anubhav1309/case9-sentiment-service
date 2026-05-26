@@ -90,6 +90,16 @@ async def audit_middleware(request: Request, call_next):
 
 
 # ── Routes ────────────────────────────────────────────────────────────────────
+@app.get("/", tags=["ops"])
+def root():
+    return {
+        "service": "Sentiment Classification API",
+        "docs": "/docs",
+        "health": "/health",
+        "predict": "/predict",
+        "drift": "/drift"
+    }
+
 @app.get("/health", response_model=HealthResponse, tags=["ops"])
 def health():
     """Liveness probe — used by Docker HEALTHCHECK and Render."""

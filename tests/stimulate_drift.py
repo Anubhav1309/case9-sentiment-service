@@ -1,7 +1,6 @@
 import requests
-import json
 
-BASE = "https://Anubhav130-sentiment.hf.space"
+BASE = "https://anubhav130-sentiment.hf.space"
 
 print("Step 1: Checking drift status before simulation...")
 r = requests.get(f"{BASE}/drift")
@@ -26,3 +25,7 @@ print("\nStep 5: Checking drift after shift — should show drift_detected: true
 r = requests.get(f"{BASE}/drift")
 print(json.dumps(r.json(), indent=2))
 
+# Phase 3: reset and verify
+requests.post(f"{BASE}/drift/reset")
+print("\nAfter reset:")
+print(requests.get(f"{BASE}/drift").json())
