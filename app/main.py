@@ -5,7 +5,6 @@ Wraps distilbert-base-uncased-finetuned-sst-2-english in a FastAPI service.
 
 import time
 import uuid
-import logging
 from datetime import datetime
 from contextlib import asynccontextmanager
 
